@@ -106,7 +106,7 @@ export function Login() {
         onClick={handleGitHubSignin}
         className="bg-slate-50 hover:bg-slate-200 text-black  shadow rounded border-2 border-gray-300 py-2 px-4 w-full"
       >
-        Google login
+        Github login
       </button>
       <p className="my-4 text-sm flex justify-between px-3">
         Don't have an account?
