@@ -89,13 +89,13 @@ export function Login() {
 
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-emerald-700 hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Sign In
           </button>
           <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+            className="inline-block align-baseline font-bold text-sm text-emerald-700 hover:text-emerald-800"
             href="#!"
             onClick={handleResetPassword}
           >
@@ -111,7 +111,10 @@ export function Login() {
       </button>
       <p className="my-4 text-sm flex justify-between px-3">
         Don't have an account?
-        <Link to="/register" className="text-blue-700 hover:text-blue-900">
+        <Link
+          to="/register"
+          className="text-emerald-900 hover:text-emerald-900"
+        >
           Register
         </Link>
       </p>

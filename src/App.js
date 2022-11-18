@@ -5,7 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
   return (
-    <div className="bg-slate-300 text-black h-screen flex text-white">
+    <div className="container mx-auto pt-20 text-black h-screen">
       <AuthProvider>
         <Routes>
           <Route

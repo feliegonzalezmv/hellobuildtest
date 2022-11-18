@@ -8,6 +8,7 @@ export const Register = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
+    gitUSer: "",
     password: "",
   });
 
@@ -17,7 +18,7 @@ export const Register = () => {
     e.preventDefault();
 
     try {
-      await signup(user.email, user.password);
+      await signup(user.email, user.password, user.gitUSer);
       navigate("/");
     } catch (error) {
       setError(error.message);
@@ -49,6 +50,21 @@ export const Register = () => {
 
         <div className="mb-4">
           <label
+            htmlFor="gitUser"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Git user
+          </label>
+          <input
+            type="text"
+            onChange={(e) => setUser({ ...user, gitUSer: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="yourgituser"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
             htmlFor="password"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
@@ -62,13 +78,13 @@ export const Register = () => {
           />
         </div>
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button className="bg-emerald-700 hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
           Register
         </button>
       </form>
       <p className="my-4 text-sm flex justify-between px-3">
         Already have an Account?
-        <Link to="/login" className="text-blue-700 hover:text-blue-900">
+        <Link to="/login" className="text-emerald-700 hover:text-emerald-900">
           Login
         </Link>
       </p>

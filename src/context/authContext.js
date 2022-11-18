@@ -8,7 +8,8 @@ import {
   GithubAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const authContext = createContext();
 
@@ -22,8 +23,14 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const signup = async (email, password, gitUser) => {
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    await setDoc(doc(db, "users", user.uid), { gitUser });
+    console.log("Document Added");
   };
 
   const login = (email, password) => {
@@ -48,6 +55,12 @@ export function AuthProvider({ children }) {
     return () => unsubuscribe();
   }, []);
 
+  const getUserData = async (uid) => {
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+    return docSnap;
+  };
+
   return (
     <authContext.Provider
       value={{
@@ -58,6 +71,7 @@ export function AuthProvider({ children }) {
         logout,
         loading,
         resetPassword,
+        getUserData,
       }}
     >
       {children}
