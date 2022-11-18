@@ -1,6 +1,6 @@
-#HelloBuild Test
+# HelloBuild Test
 
-Technical test of HelloBuild
+Technical test for HelloBuild
 
 ## Description
 
