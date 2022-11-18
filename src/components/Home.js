@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useFetch } from "../hooks";
+import { CardComponent } from "./CardComponent";
 
 export function Home() {
   const { logout, user } = useAuth();
 
-  console.log(user);
+  const { data, loading, error } = useFetch(
+    `https://api.github.com/users/${user.screenName}/repos`
+  );
+
+  useEffect(() => {
+    console.log("Data", data);
+  }, [data]);
+
+  console.log("Current User => ", user);
   const handleLogout = async () => {
     try {
       await logout();
@@ -23,6 +34,10 @@ export function Home() {
           logout
         </button>
       </div>
+
+      {data?.map((item) => (
+        <CardComponent />
+      ))}
     </div>
   );
 }
