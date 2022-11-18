@@ -33,6 +33,11 @@ export function AuthProvider({ children }) {
     console.log("Document Added");
   };
 
+  const sendFavorites = async (uid, favorites) => {
+    await setDoc(doc(db, "favorites", uid), { items: favorites });
+    console.log("Document Added");
+  };
+
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -61,6 +66,12 @@ export function AuthProvider({ children }) {
     return docSnap;
   };
 
+  const getFavorites = async (uid) => {
+    const docRef = doc(db, "favorites", uid);
+    const docSnap = await getDoc(docRef);
+    return docSnap;
+  };
+
   return (
     <authContext.Provider
       value={{
@@ -72,6 +83,8 @@ export function AuthProvider({ children }) {
         loading,
         resetPassword,
         getUserData,
+        sendFavorites,
+        getFavorites,
       }}
     >
       {children}

@@ -1,32 +1,45 @@
 import React from "react";
 import { format } from "date-fns";
-export function CardComponent({ item }) {
+import Heart from "react-heart";
+
+export function CardComponent({ item, handleAddFavorite, isFavorite }) {
   return (
     <>
       <article className="bg-white p-5 rounded shadow shadow-emerald-300">
-        <div className="flex items-center">
-          <img
-            src={item.owner.avatar_url}
-            alt={item.owner.login}
-            className="w-16 h-16 shadow rounded-full"
-          />
-          <ul className="ml-5">
-            <li>
-              <h2 className="font-bold text-xl">{item.owner.login}</h2>
-            </li>
-            <div>
-              <p className="mr-2">{item.name}</p>
-              {item.private ? (
-                <p className="bg-rose-700 py-1 px-2 rounded-lg shadow text-white text-xs inline-block opacity-75">
-                  Private
-                </p>
-              ) : (
-                <p className="bg-emerald-700 py-1 px-2 rounded-lg shadow text-white text-xs inline-block opacity-75 mr-2">
-                  Public
-                </p>
-              )}
+        <div className="flex justify-between">
+          <div className="flex-initial w-64">
+            <div className="flex">
+              <img
+                src={item.owner.avatar_url}
+                alt={item.owner.login}
+                className="w-16 h-16 shadow rounded-full"
+              />
+              <ul className="ml-5 ">
+                <li>
+                  <h2 className="font-bold text-xl">{item.owner.login}</h2>
+                </li>
+                <div>
+                  <p className="mr-2">{item.name}</p>
+                  {item.private ? (
+                    <p className="bg-rose-700 py-1 px-2 rounded-lg shadow text-white text-xs inline-block opacity-75">
+                      Private
+                    </p>
+                  ) : (
+                    <p className="bg-emerald-700 py-1 px-2 rounded-lg shadow text-white text-xs inline-block opacity-75 mr-2">
+                      Public
+                    </p>
+                  )}
+                </div>
+              </ul>
             </div>
-          </ul>
+          </div>
+
+          <div className="flex-none h-8 w-8">
+            <Heart
+              isActive={isFavorite}
+              onClick={() => handleAddFavorite(item.id)}
+            />
+          </div>
         </div>
 
         <div>
