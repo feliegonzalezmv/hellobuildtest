@@ -8,7 +8,7 @@ export function Login() {
     email: "",
     password: "",
   });
-  const { login, resetPassword } = useAuth();
+  const { login, resetPassword, loginWithGitHub } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -26,8 +26,9 @@ export function Login() {
   const handleChange = ({ target: { value, name } }) =>
     setUser({ ...user, [name]: value });
 
-  const handleGitHubSignin = async () => {
+  const handleGithubSignin = async () => {
     try {
+      await loginWithGitHub();
       navigate("/");
     } catch (error) {
       setError(error.message);
@@ -66,7 +67,7 @@ export function Login() {
             id="email"
             onChange={handleChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="youremail@company.tld"
+            placeholder="youremail@example.com"
           />
         </div>
         <div className="mb-4">
@@ -103,7 +104,7 @@ export function Login() {
         </div>
       </form>
       <button
-        onClick={handleGitHubSignin}
+        onClick={handleGithubSignin}
         className="bg-slate-50 hover:bg-slate-200 text-black  shadow rounded border-2 border-gray-300 py-2 px-4 w-full"
       >
         Github login

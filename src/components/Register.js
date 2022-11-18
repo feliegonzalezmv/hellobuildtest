@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Alert } from "../components";
 
 export const Register = () => {
-  const { signUp } = useAuth();
+  const { signup } = useAuth();
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -17,7 +17,7 @@ export const Register = () => {
     e.preventDefault();
 
     try {
-      await signUp(user.email, user.password);
+      await signup(user.email, user.password);
       navigate("/");
     } catch (error) {
       setError(error.message);
